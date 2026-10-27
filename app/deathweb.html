@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//
+          EN" "http://www.w3.org/TR/xhtml/DTD/xhtml-transitional.dtd">
+          <html lang="en" dir="ltr">
+            <head>
+                <meta charset="utf-8">
+             <title>Death on the Arrow</title>
+             <link rel="stylesheet" href="./style.css">
+            </head>
+           <body onload="getName()">
+            <main>
+                <!-- creating a modal to display character inventory -->
+                <div class="modal-container" id="inventory-modal">
+        
+                    <div class="modal-content-container">
+        
+                        <h1 style="margin-top:1rem;"><span>Inventory</span></h1>
+        
+                        <div class="modal-content">
+                            <p style="text-align:left;"><span id="inventory-items"></span></p>
+                        </div>
+        
+                        <div class="modal-button-container">
+                            <button onclick="closeInventory()">Close</button>
+                        </div>
+        
+                    </div>
+                </div>
+        <!-- end inventory modal-->
+
+        <!-- create a modal to display the map -->
+        <div class="modal-container" id="map-modal">
+          <div class="modal-content-container">
+            <div class="modal-content">
+              <div class="map-container" id="map-container">
+                <img alt="" id="map" src="assets/map.jpg" />
+              </div>
+            </div>
+            <div class="modal-button-container dark-outlines">
+              <button onclick="closeMap()">Close</button>
+            </div>
+          </div>
+        </div>
+        <!-- end map modal -->
+
+        <!-- <div class="modal-sports-container" id="sports-modal">
+        
+            <div class="modal-content-container">
+                
+                <div class="modal-container" id="sports-option-modal">
+        
+                    <div class="modal-content-container">
+                         <h1>No options are selected! <br><br> Please select one.</h1>
+
+                         <div class="modal-button-container">
+                            <button onclick="closeOptionModal()">Continue</button>
+                        </div>
+
+                    </div>
+
+               </div>
+                <h1><span>What sport do you play?</span></h1>
+
+                <div class="modal-content" id="sporty-items"></div>
+                <div class="sports-equipment-container" id="equipment"></div>
+                <div class="modal-button-container">
+                    <button onclick="logSport()">Continue</button>
+                </div>
+
+            </div>
+        </div> -->
+        
+                <div class="game-container">
+                    <div class="heading" id="top-line"></div>
+                    <div class="details-container" id="details-container">
+                        <div class="blank-box-left" id="blank-box-left">
+                            <span class="modifier-name" id="modifier-name">
+                                <div>Click to roll</div>
+                            </span>
+                            <div class="roll-click" id="roll-click" onclick="rollModified()"></div>
+                            <div class="roll-box" id="roll-box"><span class="roll-box-span" id="roll-box-span">0</span></div>
+                            <div class="exploded-roll" id="exploded-roll"></div>
+                        </div>
+                        <div class="modifier-table" id="modifier-table"></div>
+                        <div class="bonus-container" id="bonus-container"></div>
+                        
+            
+                        <div class="blank-box-right" id="blank-box-right">
+                            <div class="money-box" id="money-box"></div>
+                        </div>
+                    </div>
+                    <div class="game-options-container">
+        
+                       <div class="modal-container" id="option-modal">
+        
+                            <!-- <div class="modal-content-container">
+                                 <h1>No options are selected! <br><br> Please select one.</h1>
+        
+                                 <div class="modal-button-container">
+                                    <button onclick="closeOptionModal()">Continue</button> -->
+                                <!-- </div>
+        
+                            </div> -->
+        
+                       </div>
+
+                       <div class="page-text-container" id="page-text"></div>
+
+                    </div>
+
+
+                  <div class="bottom-buttons">
+                    <div class="next-button-container" id="next-button"></div>
+                    <div class="map-button-container" id="map-button" style="display: none;"></div>
+                  </div>
+                </div>
+            </main>
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <script src="deathweb.js"></script>
+        </body>
+        </html>
+        
+        
