@@ -1,6 +1,6 @@
 # Game Rules as Encoded in the Code
 
-This is reference material pulled from `arrow/src/data/*` and `deathweb.js`. Where the two versions differ, both are shown.
+This is reference material pulled from `app/src/data/*` and the legacy `deathweb.js` at the repo root. Where the two versions differ, both are shown.
 
 ## Setting
 

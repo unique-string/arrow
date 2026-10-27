@@ -17,16 +17,17 @@
 | Situational bonus text | ⚠️ | React shows full profession + motivation text, run together without a separator; legacy shows the shorter `shorthand` |
 | Money display + add/subtract | ✅ | React correctly blocks going negative; legacy's error flash never worked |
 | Inventory view | ✅ | Legacy shows a read-only list |
-| Inventory add/remove | ➕ ⚠️ | Edits are lost when the modal closes (see issues) |
-| Map | ➕ ⚠️ | Legacy shows a static image (and the image file is missing). React has a draggable "you are here" marker and text pins, but it's loaded via an iframe of the app itself |
+| Inventory add/remove | ➕ | Edits persist while the sheet is open (not across reloads) |
+| Map | ➕ | Legacy shows a static image (and the image file is missing). React has a draggable "you are here" marker labelled with the character's name, plus editable text pins |
 | Violence rules page | ⚠️ | Content written in `info.js`, never reachable |
 | Persistence (reload keeps character) | ❌ (both) | All state is in memory |
 
 ## Suggested order to finish the port
 
-1. Fix the data-flow bugs that lose state: inventory lifted to `CharSheet`, map rendered directly instead of via iframe.
-2. Restore missing rules: the Assistant penalty and the Sporty → sport step (add `sports.js` to `src/data/`).
-3. Show the character's identity on the sheet; separate the bonus texts.
-4. Decide where the violence page lives (a button on the sheet?).
-5. Remove the legacy and dead files once you're satisfied (see [project-layout.md](project-layout.md)).
-6. Optional: persist the character to `localStorage`; upgrade to React 18 (`createRoot`).
+The inventory and map state bugs are fixed (see [issues.md](issues.md#resolved-2026-10-27)).
+
+1. Restore missing rules: the Assistant penalty and the Sporty → sport step (add `sports.js` to `src/data/`).
+2. Show the character's identity on the sheet; separate the bonus texts.
+3. Decide where the violence page lives (a button on the sheet?).
+4. Retire the legacy app (`deathweb.*`, `style.css`, `assets/` at the repo root) once React reaches parity.
+5. Optional: persist the character to `localStorage`; upgrade to React 18 (`createRoot`).
