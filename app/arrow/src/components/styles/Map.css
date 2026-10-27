@@ -1,0 +1,125 @@
+
+.map-window {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 11;
+}
+
+.map-container {
+  width: 1000px;
+  height: 430px;
+  position: relative;
+  background: white;
+  border: 2px solid black;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.map-close {
+  margin-top: 8px;
+}
+
+.map {
+  width: 100%;
+}
+
+.pin-field {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 12;
+}
+
+.pin-modal {
+  width: 90px;
+  padding: 4px 0px 8px;
+  border: 1px solid black;
+  border-radius: 8px;
+  background: white;
+  z-index: 1015;
+  position: absolute;
+  transform: translate(-50%, -100%);
+}
+
+/* left/top are the pin's tip; the translate puts the bottom of the stem there */
+.pin-container {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  z-index: 14;
+  display: flex;
+  width: 24px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pin-text {
+  height: 20px;
+  min-width: 20px;
+  width: fit-content;
+  background: white;
+  padding: 2px 4px;
+  border: 1px solid black;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.pin-text-input {
+  min-width: 16px;
+  padding: 0;
+  border: none;
+  font: inherit;
+}
+
+.stem-delete {
+  display: flex;
+}
+
+.pin-delete {
+  width: 30px;
+  margin-right: -30px;
+}
+
+.pin-delete-button {
+  width: 20px;
+}
+
+.pin-delete-image {
+  width: 18px;
+  height: 18px;
+}
+
+.pin-stem {
+  height: 60px;
+  width: 1px;
+  border: 1px solid black;
+  border-radius: 1px;
+}
+
+.you-are-here {
+  width: 40px;
+  position: absolute;
+  z-index: 13;
+}
+
+.clear-pins {
+  position: absolute;
+  right: 0;
+  z-index: 1020;
+}
+
+.character-pin {
+  width: 30px;
+  cursor: move;
+  touch-action: none;
+  z-index: 20;
+}
+
+.character-pin-name {
+  text-align: center;
+  font-weight: bold;
+  background: white;
+}
