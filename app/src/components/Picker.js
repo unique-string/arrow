@@ -1,75 +1,79 @@
 import React, { useEffect, useState } from 'react'
 import './styles/Picker.css'
 import pf from '../functions/picker_functions'
-import check from '../img/check.png'
 
 
 const Picker = (props) => {
 
-  const [ currentOption, setCurrentOption ] = useState(null)
-  const [ clicked, setClicked ] = useState(false)
+  // the details box previews the hovered option, falling back to the selected one
+  const [ selected, setSelected ] = useState(props.previousChoice)
+  const [ hovered, setHovered ] = useState(null)
   const [ displayShuffle, setDisplayShuffle ] = useState(pf.displayOptions(props.currentChoice))
   const heading = props.currentChoice !== 'done' ? pf.setHeading(props.currentChoice) : ''
+  const shown = hovered || selected
 
 
   useEffect(() => {
     setDisplayShuffle(pf.displayOptions(props.currentChoice))
-  }, [props.currentChoice, setDisplayShuffle])
-
-  const optionClick = (option) => {
-    setCurrentOption(option)
-    setClicked(true)
-  }
+    setSelected(props.previousChoice)
+    setHovered(null)
+  }, [props.currentChoice, props.previousChoice, setDisplayShuffle])
 
   const confirm = (option) => {
-    const newCharacterData = {...props.characterData}
-    newCharacterData[props.currentChoice] = option
-    props.setCharacterData(newCharacterData)
-    const currentItems = newCharacterData[props.currentChoice].items
-    const money = newCharacterData[props.currentChoice].money
-    if (currentItems) {
-      for (let item of currentItems) {
-        if (item.includes('dollars')) currentItems.splice(currentItems.indexOf(item), 1)
+    if (option.items) {
+      for (let item of option.items) {
+        if (item.includes('dollars')) option.items.splice(option.items.indexOf(item), 1)
       }
     }
-    if (money) {
-      newCharacterData.money ? newCharacterData.money += money : newCharacterData.money = money
-    }
+    const newCharacterData = {...props.characterData, [props.currentChoice]: option}
+    if (option.money) newCharacterData.money = (newCharacterData.money || 0) + option.money
+    props.setCharacterData(newCharacterData)
   }
 
-  console.log(currentOption)
-
   return (
-    <div className="picker">
-      <div className="picker-heading">{heading}</div>
-      <div className="options thin-scroll">
-      {displayShuffle.map((option, index) => {
-        return (
-          <div
-          className="option"
-          key={`option-${index}`}
-          onClick={() => optionClick(option)}
-          onMouseEnter={() => setCurrentOption(option)}
-          onMouseLeave={!clicked ? () => setCurrentOption(null) : () => {}}
-          >
-            {option === currentOption ? (
-              <div className="confirm-modal">
-                <button className="confirm-button" onClick={() => confirm(option)}>
-                  <img alt="confirm" src={check} />
-                </button>
-              </div>) : ''}
-            <div className="option-title">{option.name}</div>
-            <div className="option-body">
-              <div className="option-text">{option.text}</div>
-              {option.items ? (
-              <div className="option-items">
-                <div className="items-list">Inventory items: {option.items.map(item => {return item}).join(', ')}</div>
+    <div className="picker-page">
+      <div className="picker">
+        <div className="picker-heading">{heading}</div>
+        <div className="picker-body">
+          <div className="options">
+          {displayShuffle.map((option, index) => {
+            return (
+              <button
+              className={`option ${option === selected ? 'selected' : ''}`}
+              key={`option-${index}`}
+              aria-pressed={option === selected}
+              onClick={() => setSelected(option)}
+              onMouseEnter={() => setHovered(option)}
+              onMouseLeave={() => setHovered(null)}
+              >
+                {option.name}
+              </button>
+            )
+          })}
+          </div>
+          {/* every option's details sit stacked in one spot with only the shown one visible,
+              so the box is as tall as the longest and the picker doesn't resize while browsing */}
+          <div className="option-details thin-scroll">
+            <div className="details-stack">
+              <div className={`details-card ${!shown ? 'visible' : ''}`}>
+                <div className="details-prompt">Choose an option to see its details.</div>
               </div>
-              ) : ''}
+              {displayShuffle.map((option, index) => (
+                <div className={`details-card ${option === shown ? 'visible' : ''}`} key={`details-${index}`}>
+                  <div className="option-title">{option.name}</div>
+                  <div className="option-text">{option.text}</div>
+                  {option.items ? (
+                    <div className="items-list">Inventory items: {option.items.join(', ')}</div>
+                  ) : ''}
+                </div>
+              ))}
             </div>
           </div>
-        )
-      })}
+        </div>
+        <div className="picker-footer">
+          <button className="continue-button picker-back" onClick={() => props.goBack()}>Back</button>
+          <button className="continue-button picker-continue" disabled={!selected} onClick={() => confirm(selected)}>Continue</button>
+        </div>
       </div>
     </div>
   );

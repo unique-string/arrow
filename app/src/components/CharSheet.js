@@ -25,7 +25,11 @@ const CharSheet = ({character}) => {
   }
 
   return (
-    <div className="game-container">
+    <div className="game-container sheet-page">
+      <div className="sheet-title-block">
+        <div className="sheet-name">{name}</div>
+        <div className="sheet-identity">{personality.name} {profession.name}</div>
+      </div>
       {showInventory ? (
         <Inventory 
           items={items}
@@ -98,17 +102,30 @@ const CharSheet = ({character}) => {
             <div className="whole-roll">
               <div className="roll-box" id="roll-box">
                 <div className="modifier-name" id="modifier-name">{roll.verb ? sf.capitalizeWord(roll.verb) : ''}</div>
-                <div key={roll.hash} className={`roll-value ${sf.rollValueColor(roll.value)}`}>{roll.value}</div>
+                {roll.value === '' ? (
+                  <div className="roll-placeholder">
+                    <span><span className="click-word">Click</span><span className="tap-word">Tap</span> a verb to roll</span>
+                  </div>
+                ) : (
+                  <div key={roll.hash} className={`roll-value ${sf.rollValueColor(roll.value)}`}>{roll.value}</div>
+                )}
                 <div className="roll-detail">{roll.detail}</div>
               </div>
             </div>
           </div>
         </div>
         <div className="description-text" onClick={() => loggins()}>
-          {profession.text}
-          {motivation.text}
+          <div className="description-section">
+            <h2 className="description-heading">{profession.name}</h2>
+            {profession.text}
+          </div>
+          <div className="description-section">
+            <h2 className="description-heading">{motivation.name}</h2>
+            {motivation.text}
+          </div>
         </div>
       </div>
+      <div className="sheet-title">Death on the Arrow</div>
     </div>
   )
 }

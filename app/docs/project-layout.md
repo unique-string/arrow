@@ -21,13 +21,18 @@ Paths are relative to the repository root.
         ├── App.js           Shows SetChar until a character exists, then CharSheet
         ├── setupTests.js    Loads jest-dom matchers
         ├── components/
-        │   ├── SetChar.js         Creation flow controller (name → personality → profession → motivation)
+        │   ├── SetChar.js         Creation flow controller (name → personality → profession → motivation);
+        │   │                      Continue advances a step, Back undoes the previous choice and shows it
+        │   │                      selected again (from the first step, back to the name screen with the name kept)
         │   ├── TakeName.js        Intro text + name input
-        │   ├── Picker.js          Shuffled option cards with hover-to-confirm checkmark
+        │   ├── Picker.js          Shuffled two-column option grid, details box (hover previews, else the
+        │   │                      selection), and a Continue button enabled once an option is chosen
         │   ├── InfoPage.js        Optional "instructions" pages between steps
         │   ├── CharSheet.js       Verb list (click to roll), money, roll display; owns inventory items
         │   │                      and keeps Map mounted (hidden when closed)
         │   ├── CharSheet.test.js  Inventory persistence, print sheet, and map pin tests
+        │   ├── Picker.test.js     Continue enabling and details-box hover/selection tests
+        │   ├── SetChar.test.js    Back navigation, money undo, and instructions not reopening
         │   ├── PrintSheet.js      Print-only sheet (character + dice rules, violence rules, map), portalled to <body>
         │   │                      (styles/PrintSheet.css hides the app and shows it under @media print)
         │   ├── Inventory.js       Modal with add/remove items (state lives in CharSheet)
@@ -64,7 +69,7 @@ Pin and pin-popup positions are stored as percentages of the map container (`{id
 ## Mobile layout
 
 - The page scrolls vertically (`.App` only clips sideways overflow). Modals (`.modal-container`) are `position: fixed`, so they stay centered when the page is scrolled.
-- Breakpoints: 600px stacks the character sheet (verbs and roll box on top, description below); 550px and 700px tighten the picker and the name/info pages; 900px puts the picker in two columns for tablets.
+- Breakpoints: 600px stacks the character sheet (verbs and roll box on top, description below). On phones in either orientation (≤600px wide, or landscape ≤500px tall), the print button wraps below inventory/map to leave room for a wider verbs column. 550px and 700px tighten the picker and the name/info pages. The picker is only as tall as its content and centered on screen, capped at screen height (its details box scrolls past that, so Continue stays visible). The details box stacks every option's details in one grid cell, showing only the current one, so it's as tall as the step's longest description and doesn't resize while browsing; on landscape phones the details box sits beside the option grid.
 - Touch: hover highlights are wrapped in `@media (hover: hover)` so they don't stick after a tap. `@media (pointer: coarse)` enlarges small buttons and sets inputs to 16px, which stops iOS from zooming in on focus.
 - Map: `.map-viewport` sizes the frame to fit the screen (including landscape phone height), and `.map-container` keeps map.jpg's 3800:1600 ratio. On a portrait phone the map stays 680px wide and pans sideways inside `.map-scroll`. "Clear pins" sits outside the scroller so it stays in place.
 

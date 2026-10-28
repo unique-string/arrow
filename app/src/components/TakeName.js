@@ -4,13 +4,13 @@ import pf from '../functions/picker_functions'
 
 const TakeName = (props) => {
 
-  const [ characterName, setCharacterName ] = useState('') 
+  const [ characterName, setCharacterName ] = useState(props.previousName) 
 
   const logName = (learn) => {
-    if (learn) props.setInstructions(true)
     if (characterName) {
+        props.setInstructions(learn)
+        props.setShowInfo(learn)
         props.setCurrentChoice('personality')
-        if (props.instructions) props.setShowInfo(true)
         props.setCharacterData({...props.characterData, name: characterName})
     } else {
       alert('You didn\'t enter a name! If you want to be nameless, you can put a space in the box.')
@@ -26,7 +26,7 @@ return (
     </div>
     <div className="name-input">
       <span>What's your name?</span>
-      <input type="text" id="charname" onChange={(e) => pf.nameInput(e, setCharacterName)}/>
+      <input type="text" id="charname" defaultValue={props.previousName} onChange={(e) => pf.nameInput(e, setCharacterName)}/>
     </div>
     <div className="continue-buttons">
       <button className="continue-button" onClick={() => logName(false)}>Continue</button>

@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './styles/SetChar.css'
 import TakeName from './TakeName'
 import Picker from './Picker'
 import InfoPage from './InfoPage'
+
+const steps = ['personality', 'profession', 'motivation']
 
 
 const SetChar = ({setCharacter}) => {
@@ -11,25 +13,45 @@ const SetChar = ({setCharacter}) => {
   const [ showInfo, setShowInfo ] = useState(false)
   const [ instructions, setInstructions ] = useState(false)
   const [ characterData, setCharacterData ] = useState({})
+  // kept so going back to the name screen can refill the name box
+  const [ previousName, setPreviousName ] = useState('')
+  // the choice undone by Back, so the picker can show it selected again
+  const [ previousChoice, setPreviousChoice ] = useState(null)
 
-  const charName = characterData.name
-  const motivation = characterData.motivation
-  console.log(currentChoice)
-
-  useEffect(() => {
-    console.log(instructions)
-    if (characterData.name) {
-      if (instructions) setShowInfo(true)
-      if (characterData.motivation) setCharacter(characterData)
-      else if (characterData.profession) setCurrentChoice('motivation')
-      else if (characterData.personality) setCurrentChoice('profession')
+  // called by Picker with the chosen option added; moves on to the next unchosen step
+  const advance = (newCharacterData) => {
+    const next = steps.find(step => !newCharacterData[step])
+    if (!next) {
+      setCharacter(newCharacterData)
+      return
     }
-  }, [characterData, instructions, setShowInfo, setCurrentChoice, setCharacter])
+    setCharacterData(newCharacterData)
+    setCurrentChoice(next)
+    setPreviousChoice(null)
+    if (instructions) setShowInfo(true)
+  }
+
+  // undoes the previous step's choice (and its money); from the first step, returns to the name screen
+  const goBack = () => {
+    const index = steps.indexOf(currentChoice)
+    if (index === 0) {
+      setPreviousName(characterData.name)
+      setCharacterData({})
+      return
+    }
+    const previous = steps[index - 1]
+    const newCharacterData = {...characterData}
+    if (newCharacterData[previous].money) newCharacterData.money -= newCharacterData[previous].money
+    delete newCharacterData[previous]
+    setPreviousChoice(characterData[previous])
+    setCharacterData(newCharacterData)
+    setCurrentChoice(previous)
+  }
 
   return (
     <div className="game-container">
       {showInfo ? (
-        <InfoPage 
+        <InfoPage
         currentChoice={currentChoice}
         setCurrentChoice={setCurrentChoice}
         setShowInfo={setShowInfo}
@@ -37,21 +59,21 @@ const SetChar = ({setCharacter}) => {
       ) : (
         <div className="take-data">
           {!characterData.name ? (
-            <TakeName 
-              currentChoice={currentChoice}
+            <TakeName
+              previousName={previousName}
               characterData={characterData}
-              setCurrentChoice={setCurrentChoice}            
+              setCurrentChoice={setCurrentChoice}
               setCharacterData={setCharacterData}
               setInstructions={setInstructions}
               setShowInfo={setShowInfo}
             />
           ) : (
-            <Picker 
+            <Picker
               currentChoice={currentChoice}
               characterData={characterData}
-              setCurrentChoice={setCurrentChoice}
-              setCharacterData={setCharacterData}
-              setShowInfo={setShowInfo}                 
+              previousChoice={previousChoice}
+              setCharacterData={advance}
+              goBack={goBack}
             />
           )}
         </div>

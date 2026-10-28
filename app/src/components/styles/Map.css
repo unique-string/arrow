@@ -103,13 +103,21 @@
   margin-right: -30px;
 }
 
+/* square, with no default button padding, so the icon sits dead center */
 .pin-delete-button {
-  width: 20px;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .pin-delete-image {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
+  display: block;
 }
 
 .pin-stem {
@@ -148,6 +156,16 @@
 @media (pointer: coarse) {
   .map-close, .clear-pins {
     padding: 6px 14px;
+  }
+
+  .pin-delete-button {
+    width: 28px;
+    height: 28px;
+  }
+
+  .pin-delete-image {
+    width: 20px;
+    height: 20px;
   }
 
   .pin-text-input {

@@ -22,6 +22,51 @@
   margin-top: 2%;
 }
 
+/* character name block above the sheet and game title below; the column direction stacks them around .character-sheet */
+.sheet-page {
+  flex-direction: column;
+}
+
+.sheet-title-block {
+  padding: 14px 16px 10px;
+  margin: 0 auto 8px;
+  border-bottom: 1px solid black;
+}
+
+.sheet-name {
+  font-size: 2.2rem;
+  font-weight: bold;
+  line-height: 1.15;
+}
+
+.sheet-identity {
+  font-size: 1.1rem;
+  color: #444;
+  margin-top: 2px;
+}
+
+.sheet-title {
+  margin: 28px auto 16px;
+  font-size: .8rem;
+  letter-spacing: .3rem;
+  text-transform: uppercase;
+  color: #666;
+}
+
+/* matches the section headings on the print sheet */
+.description-heading {
+  font-size: .85rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid black;
+}
+
+.description-section {
+  margin-bottom: 16px;
+}
+
 .character-sheet {
   display: flex;
   justify-content: space-around;
@@ -112,16 +157,27 @@
   height: 1rem;
 }
 
+/* fills the space under the verb name; the formula overlays the bottom edge */
 .roll-value {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Oswald', 'Arial Narrow', sans-serif;
   font-weight: bold;
-  font-size: 4.5rem;
+  font-size: 4.2rem;
+  line-height: 1;
   width: 100%;
-  text-align: center;
   animation: pulse .5s ease-in-out;
   -webkit-animation: pulse .5s ease-in-out;
   -moz-animation: pulse .5s ease-in-out;
-  margin: -14px;
-  letter-spacing: 2px
+  /* proportional digits so a narrow "1" isn't padded out to full width; the indent offsets the trailing letter-spacing */
+  font-variant-numeric: proportional-nums;
+  letter-spacing: -1px;
+  text-indent: -1px;
+  /* nudged up to look centered; transform is taken by the pulse animations */
+  position: relative;
+  top: -8px;
 }
 
 .red {
@@ -142,14 +198,41 @@
   -moz-animation: pulse-gold .8s ease-in-out, flash-gold 1s .8s infinite ease-in-out;
 }
 
-.roll-detail {
-  font-size: .8rem;
-  height: 1.1rem;
-  width: 100%;
-  font-family: "Times New Roman", Times, serif !important;
+/* spans the whole box, over the empty verb name row, so it's centered top to bottom */
+.roll-placeholder {
+  flex: 1;
   display: flex;
-  text-align: right;
-  margin: 0 auto;
+  align-items: center;
+  margin-top: -1rem;
+  padding: 0 8px;
+  font-size: .85rem;
+  font-style: italic;
+  color: #777;
+}
+
+/* "Click" for mouse users, "Tap" on touch screens */
+.tap-word {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .click-word {
+    display: none;
+  }
+
+  .tap-word {
+    display: inline;
+  }
+}
+
+.roll-detail {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  right: 0;
+  font-size: .8rem;
+  line-height: 1;
+  text-align: center;
 }
 
 .blank-box-right {
@@ -271,13 +354,11 @@ color: rgb(43, 42, 42) !important;
 
   .roller {
     width: 100%;
-    height: auto;
     align-items: stretch;
-    padding: 12px 0;
   }
 
   .sheet-verbs {
-    margin: 0 10px 0 0;
+    margin: 0;
   }
 
   .verb-title, .verb-value {
@@ -285,14 +366,61 @@ color: rgb(43, 42, 42) !important;
     padding-bottom: 5px;
   }
 
+  .description-text {
+    width: auto;
+    margin: 4px 16px 24px;
+  }
+}
+
+/* phones in either orientation: two buttons to a row (print wraps below) so the verbs column has room for long names */
+@media screen and (max-width: 600px), screen and (max-height: 500px) and (orientation: landscape) {
+  .roller {
+    height: auto;
+    padding: 12px 0;
+  }
+
+  .sheet-verbs {
+    width: 146px;
+    margin-right: 30px;
+  }
+
+  .between-buttons {
+    width: 110px;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 8px;
+  }
+
   .blank-box-left {
     height: auto;
     gap: 10px;
   }
+}
 
+@media screen and (max-width: 600px), screen and (max-height: 500px) and (orientation: landscape) {
+  .sheet-title-block {
+    padding: 10px 12px 8px;
+    margin-bottom: 0;
+  }
+
+  .sheet-name {
+    font-size: 1.7rem;
+  }
+
+  .sheet-identity {
+    font-size: 1rem;
+  }
+
+  .sheet-title {
+    margin-top: 8px;
+  }
+}
+
+/* landscape phones keep the side-by-side layout; give the paragraphs some room from the roll column */
+@media screen and (max-height: 500px) and (orientation: landscape) {
   .description-text {
-    width: auto;
-    margin: 4px 16px 24px;
+    padding: 0 16px 0 28px;
+    box-sizing: border-box;
   }
 }
 
