@@ -238,7 +238,7 @@ input[type=number] {
 }
 
 .between-buttons {
-  width: 108px;
+  width: 162px;
   display: flex;
   flex-direction: row;
   margin: 0 auto;

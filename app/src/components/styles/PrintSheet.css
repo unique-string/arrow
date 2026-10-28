@@ -1,0 +1,157 @@
+/* The print sheet only exists on paper, and the app only exists on screen. */
+.print-sheet {
+  display: none;
+}
+
+/* Sized to fit both Letter and A4: page 1 is laid out in a 7.25in x 9.9in box. */
+@page {
+  margin: 0.5in;
+}
+
+@page map {
+  size: landscape;
+}
+
+@media print {
+  html, body {
+    height: auto;
+  }
+
+  #root {
+    display: none;
+  }
+
+  .print-sheet {
+    display: block;
+    color: #000;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 10.5pt;
+    line-height: 1.3;
+  }
+
+  .print-page {
+    height: 9.9in;
+    display: flex;
+    flex-direction: column;
+    break-after: page;
+  }
+
+  .print-page:last-child {
+    break-after: auto;
+  }
+
+  .print-header {
+    text-align: center;
+    padding-bottom: 0.1in;
+    border-bottom: 2pt solid #000;
+  }
+
+  .print-title {
+    font-size: 9pt;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  .print-name {
+    font-size: 22pt;
+    font-weight: bold;
+    min-height: 0.4in;
+  }
+
+  .print-identity {
+    font-size: 12pt;
+    font-style: italic;
+  }
+
+  .print-sheet h2 {
+    font-size: 10pt;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0.18in 0 0.04in;
+    padding-bottom: 0.02in;
+    border-bottom: 1pt solid #000;
+  }
+
+  .print-columns {
+    display: flex;
+    gap: 0.35in;
+  }
+
+  .print-column {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .print-verbs {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .print-verbs td {
+    height: 0.27in;
+    padding: 0;
+    border-bottom: 0.5pt solid #999;
+  }
+
+  .print-verb-value {
+    text-align: right;
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .print-hint {
+    font-size: 8.5pt;
+    font-style: italic;
+    margin-top: 0.04in;
+  }
+
+  .print-lines {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .print-lines li {
+    height: 0.27in;
+    line-height: 0.27in;
+    border-bottom: 0.5pt solid #999;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .print-text {
+    font-size: 9.5pt;
+  }
+
+  .print-text .reason-graf {
+    margin: 0 0 0.06in;
+  }
+
+  /* fills whatever height is left on page 1; background lines need color-adjust to print */
+  .print-notes {
+    flex: 1;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(0.3in - 0.5pt),
+      #999 calc(0.3in - 0.5pt),
+      #999 0.3in
+    );
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* landscape content area is 7.27in tall on A4, 7.5in on Letter */
+  .print-map-page {
+    page: map;
+    height: 7.2in;
+    justify-content: center;
+  }
+
+  .print-map {
+    width: 100%;
+    max-height: 7in;
+    object-fit: contain;
+  }
+}

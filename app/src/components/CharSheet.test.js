@@ -27,9 +27,32 @@ test('inventory edits survive closing and reopening the modal', () => {
   closeInventory()
 
   openInventory()
-  expect(screen.queryByText('magnifying glass')).toBeNull()
-  expect(screen.getByText('stethoscope')).toBeInTheDocument()
-  expect(screen.getByText('lockpick')).toBeInTheDocument()
+  const inventory = within(document.querySelector('.items'))
+  expect(inventory.queryByText('magnifying glass')).toBeNull()
+  expect(inventory.getByText('stethoscope')).toBeInTheDocument()
+  expect(inventory.getByText('lockpick')).toBeInTheDocument()
+
+  // the print sheet reflects the edited inventory too
+  const printSheet = within(document.querySelector('.print-sheet'))
+  expect(printSheet.queryByText('magnifying glass')).toBeNull()
+  expect(printSheet.getByText('lockpick')).toBeInTheDocument()
+})
+
+test('print sheet shows identity, aptitudes, money, and bonus text, and the button prints', () => {
+  window.print = jest.fn()
+  render(<CharSheet character={character} />)
+
+  const printSheet = within(document.querySelector('.print-sheet'))
+  expect(printSheet.getByText('Ada')).toBeInTheDocument()
+  expect(printSheet.getByText('Nosy Nurse · Puzzle Lover')).toBeInTheDocument()
+  expect(printSheet.getByText('Investigate').nextSibling).toHaveTextContent('+3')
+  expect(printSheet.getByText('$1.00')).toBeInTheDocument()
+  expect(printSheet.getByText('nurse text')).toBeInTheDocument()
+  expect(printSheet.getByText('puzzle text')).toBeInTheDocument()
+  expect(printSheet.getByAltText('map')).toBeInTheDocument()
+
+  fireEvent.click(screen.getByTitle('Print or save as PDF'))
+  expect(window.print).toHaveBeenCalled()
 })
 
 const openMap = () => fireEvent.click(document.querySelector('.between-button-icon[alt="map"]'))
@@ -46,7 +69,7 @@ test('map pins can be placed, labelled, deleted, and persist across closing the 
   const field = document.querySelector('.pin-field')
   field.getBoundingClientRect = () => ({ left: 100, top: 50, width: 1000, height: 400 })
 
-  expect(screen.getByText('Ada')).toBeInTheDocument()
+  expect(within(document.querySelector('.map-container')).getByText('Ada')).toBeInTheDocument()
 
   placePin(field, 600, 250)
   const firstInput = document.querySelector('.pin-text-input')

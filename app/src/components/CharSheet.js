@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Inventory from './Inventory'
 import Map from './Map'
+import PrintSheet from './PrintSheet'
 import sf from '../functions/sheet_functions'
 import './styles/CharSheet.css'
 import './styles/Map.css'
@@ -39,6 +40,11 @@ const CharSheet = ({character}) => {
           setShowMap={setShowMap}
         />
       </div>
+      <PrintSheet
+        character={character}
+        items={items}
+        money={characterDetails.money}
+      />
 
       <div className="character-sheet">
         <div className="roller">
@@ -80,6 +86,13 @@ const CharSheet = ({character}) => {
               </button>
               <button className="between-button" onClick={() => setShowMap(true)}>
                 <img className="between-button-icon" alt="map" src={mapIcon}></img>
+              </button>
+              <button className="between-button" title="Print or save as PDF" onClick={() => window.print()}>
+                <svg className="between-button-icon" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2" strokeLinejoin="round" role="img" aria-label="print">
+                  <path d="M6 9V3h12v6" />
+                  <rect x="3" y="9" width="18" height="8" rx="1" />
+                  <path d="M6 14h12v7H6z" fill="#fff" />
+                </svg>
               </button>
             </div>
             <div className="whole-roll">

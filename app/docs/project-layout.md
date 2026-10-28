@@ -27,7 +27,9 @@ Paths are relative to the repository root.
         │   ├── InfoPage.js        Optional "instructions" pages between steps
         │   ├── CharSheet.js       Verb list (click to roll), money, roll display; owns inventory items
         │   │                      and keeps Map mounted (hidden when closed)
-        │   ├── CharSheet.test.js  Inventory persistence and map pin tests
+        │   ├── CharSheet.test.js  Inventory persistence, print sheet, and map pin tests
+        │   ├── PrintSheet.js      Print-only character sheet + map page, portalled to <body>
+        │   │                      (styles/PrintSheet.css hides the app and shows it under @media print)
         │   ├── Inventory.js       Modal with add/remove items (state lives in CharSheet)
         │   ├── Map.js             Map image + "you are here" marker + text pins
         │   ├── Pin.js             One editable pin label with delete button
