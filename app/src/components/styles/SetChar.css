@@ -9,6 +9,32 @@
   margin: 0 auto;
 }
 
+/* fills the screen and centers its content vertically (name screen and pickers) */
+.centered-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 16px 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* on phones .take-data's 8px padding frames the page instead */
+@media screen and (max-width: 700px), screen and (max-height: 500px) and (orientation: landscape) {
+  .take-data {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+
+  .centered-page {
+    min-height: calc(100vh - 16px);
+    min-height: calc(100dvh - 16px);
+    padding: 0;
+  }
+}
+
 .map-frame {
   border: 0;
   width: fit-content;
@@ -86,12 +112,6 @@ p {
   }
 
 @media screen and (max-width: 700px) {
-  .take-data {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-  }
-
   .enter-name {
     min-width: 0;
   }

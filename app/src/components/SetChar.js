@@ -50,34 +50,32 @@ const SetChar = ({setCharacter}) => {
 
   return (
     <div className="game-container">
-      {showInfo ? (
-        <InfoPage
-        currentChoice={currentChoice}
-        setCurrentChoice={setCurrentChoice}
-        setShowInfo={setShowInfo}
-        />
-      ) : (
-        <div className="take-data">
-          {!characterData.name ? (
-            <TakeName
-              previousName={previousName}
-              characterData={characterData}
-              setCurrentChoice={setCurrentChoice}
-              setCharacterData={setCharacterData}
-              setInstructions={setInstructions}
-              setShowInfo={setShowInfo}
-            />
-          ) : (
-            <Picker
-              currentChoice={currentChoice}
-              characterData={characterData}
-              previousChoice={previousChoice}
-              setCharacterData={advance}
-              goBack={goBack}
-            />
-          )}
-        </div>
-      )}
+      <div className="take-data">
+        {showInfo ? (
+          <InfoPage
+            currentChoice={currentChoice}
+            setCurrentChoice={setCurrentChoice}
+            setShowInfo={setShowInfo}
+          />
+        ) : !characterData.name ? (
+          <TakeName
+            previousName={previousName}
+            characterData={characterData}
+            setCurrentChoice={setCurrentChoice}
+            setCharacterData={setCharacterData}
+            setInstructions={setInstructions}
+            setShowInfo={setShowInfo}
+          />
+        ) : (
+          <Picker
+            currentChoice={currentChoice}
+            characterData={characterData}
+            previousChoice={previousChoice}
+            setCharacterData={advance}
+            goBack={goBack}
+          />
+        )}
+      </div>
     </div>
   );
 }

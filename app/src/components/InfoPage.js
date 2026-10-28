@@ -8,15 +8,17 @@ const InfoPage = (props) => {
   console.log(props.currentChoice)
   const currentInfo = info[props.currentChoice]
   return (
-    <div className="info-page">
-      <div className="info-heading">{sf.capitalizeWord(props.currentChoice)}</div>
-      {Object.entries(currentInfo).map((entry, index) => {
-        if (entry[1]) {
-          return (
-            <div className="info-section" key={`info-section-${index}`}>{entry[1]}</div>
-          )}
-        })}
-      <button className="continue-button" onClick={() => props.setShowInfo(false)}>Continue</button>
+    <div className="centered-page">
+      <div className="info-page">
+        <div className="info-heading">{sf.capitalizeWord(props.currentChoice)}</div>
+        {Object.entries(currentInfo).map((entry, index) => {
+          if (entry[1]) {
+            return (
+              <div className="info-section" key={`info-section-${index}`}>{entry[1]}</div>
+            )}
+          })}
+        <button className="continue-button" onClick={() => props.setShowInfo(false)}>Continue</button>
+      </div>
     </div>
   );
 }

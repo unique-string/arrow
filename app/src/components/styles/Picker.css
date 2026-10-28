@@ -1,13 +1,5 @@
 
-/* the picker is only as tall as its content, centered on the screen */
-.picker-page {
-  min-height: 100vh;
-  min-height: 100dvh;
-  padding: 16px 0;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-}
+/* the picker is only as tall as its content, centered on the screen by .centered-page (SetChar.css) */
 
 /* heading, then option grid and details box, then Continue; capped at the screen height */
 .picker {
@@ -135,12 +127,6 @@
 
 /* on phones the page's own 8px padding (.take-data) frames the picker instead */
 @media screen and (max-width: 700px), screen and (max-height: 500px) and (orientation: landscape) {
-  .picker-page {
-    min-height: calc(100vh - 16px);
-    min-height: calc(100dvh - 16px);
-    padding: 0;
-  }
-
   .picker {
     max-height: calc(100vh - 16px);
     max-height: calc(100dvh - 16px);
@@ -197,10 +183,6 @@
 
 /* landscape phones are too short to stack everything, so the details box sits beside the grid */
 @media screen and (max-height: 500px) and (orientation: landscape) {
-  .take-data {
-    padding: 8px;
-  }
-
   .picker-heading {
     font-size: 22px;
     line-height: 26px;

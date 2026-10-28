@@ -31,7 +31,7 @@ const Picker = (props) => {
   }
 
   return (
-    <div className="picker-page">
+    <div className="centered-page">
       <div className="picker">
         <div className="picker-heading">{heading}</div>
         <div className="picker-body">
