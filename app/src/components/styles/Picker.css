@@ -60,13 +60,40 @@
   user-select: none;
   position: relative;
 }
+@media (hover: hover) {
   .option:hover {
     border: 2px solid black;
   }
+}
+
+@media screen and (max-width: 900px) {
+  .option {
+    width: 42%;
+  }
+}
 
 @media screen and (max-width: 550px) {
+  .picker {
+    width: auto;
+    height: calc(100vh - 16px);
+    margin: 8px;
+    border-radius: 16px;
+  }
+
+  .picker-heading {
+    font-size: 24px;
+    line-height: 28px;
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
+
+  .options {
+    padding: 8px 0px;
+  }
+
   .option {
-    width: 90%;
+    width: auto;
+    margin: 0.6rem 0.8rem;
   }
 }
 

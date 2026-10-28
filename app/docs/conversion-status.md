@@ -19,7 +19,7 @@
 | Inventory view | ✅ | Legacy shows a read-only list |
 | Inventory add/remove | ➕ | Edits persist while the sheet is open (not across reloads) |
 | Map | ➕ | Legacy shows a static image (and the image file is missing). React has a draggable "you are here" marker labelled with the character's name, plus editable text pins |
-| Violence rules page | ⚠️ | Content written in `info.js`, never reachable |
+| Violence rules page | ⚠️ | Content written in `info.js` (now including attack results). Printed on page 2 of the print sheet, but never reachable in the app |
 | Persistence (reload keeps character) | ❌ (both) | All state is in memory |
 
 ## Suggested order to finish the port

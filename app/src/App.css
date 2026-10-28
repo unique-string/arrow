@@ -1,12 +1,17 @@
-html, body, #root, .App, .App>div {
+html, body, #root {
   height: 100%
 }
 
+.App, .App>div {
+  min-height: 100%
+}
+
+/* the page scrolls vertically (needed on phones); sideways overflow is clipped */
 .App {
   width: 100%;
   text-align: center;
   font-size: 14px;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .App-logo {

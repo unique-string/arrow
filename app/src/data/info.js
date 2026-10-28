@@ -33,6 +33,18 @@ const info = {
       <div><strong>Unaware target.</strong> The attacker rolls <strong>Muscle + Creep</strong> against the target's <strong>Endure</strong></div>
       <div><strong>Aware target.</strong> The attacker rolls <strong>Muscle</strong> against the target's <strong>Endure + React</strong></div>
     </div>,
+    results:
+    <div className="info-graf">
+      <div><strong>+2 or greater for target.</strong> The attack is fully ineffectual. The target has a free chance to retaliate.</div>
+      <div><strong>+1 for target.</strong> The attack is deflected. The attacker rolls React against the target's React + Muscle to see who moves next.</div>
+      <div><strong>Even.</strong> The target reacts in time to grapple with the attacker. The target and attacker roll Muscle to break the grapple in their favor and move next.</div>
+      <div><strong>+1 for attacker.</strong> The attack succeeds but does little damage. The attacker rolls React + Muscle against the target's React to see who moves next.</div>
+      <div><strong>+2 for attacker.</strong> The attack lands firmly, causing the target to sustain a minor injury. The attacker rolls React + Muscle against the target's React + Endure to see who moves next.</div>
+      <div><strong>+3 for attacker.</strong> The attack lands hard and knocks the target off balance. The target sustains a minor injury and takes -1 when rolling React + Endure against the attacker's React + Muscle to see who moves next.</div>
+      <div><strong>+4 for attacker.</strong> The attack causes serious damage. The target sustains a major injury. The target takes -1 when rolling React + Endure against the attacker's React + Muscle to see who moves next.</div>
+      <div><strong>+5 for attacker.</strong> The attack lands perfectly. The target sustains a major injury and falls unconscious.</div>
+      <div><strong>+6 or greater for attacker.</strong> Deadly force. Unless the attacker specifically intends to leave the target alive, the target is killed.</div>
+    </div>,
     body2: 
     <div className="info-graf">
       <div><strong>1. Simple.</strong> A small or improvised object (blackjack, walking stick, hardcover book, dinner plate, etc.). Gives +1 to Muscle.</div>
@@ -42,7 +54,7 @@ const info = {
     	<div><strong>5. Penetrating.</strong> A serious edged or piercing weapon (hunting knife, chef's knife, sword, javelin, etc.). Gives +2 to Muscle and +2 to Creep.</div>
       <div><strong>6. Big Trigger.</strong> A boom stick (heavy pistol, hunting rifle, shotgun, etc.). Gives +2 to Muscle and allows attackers to add React to Muscle when rolling to attack.</div>
     </div>,
-    outro: <div className="info-graf">Conventional weapons are rare on most transcontinental trains, but you may be able to turn pieces of the environment to your advantage. It\'s a good idea to look around for anything you might use to defend yourself if things get heated.</div>
+    outro: <div className="info-graf">Conventional weapons are rare on most transcontinental trains, but you may be able to turn pieces of the environment to your advantage. It's a good idea to look around for anything you might use to defend yourself if things get heated.</div>
   }
 }
 

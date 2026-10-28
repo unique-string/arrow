@@ -50,6 +50,8 @@ test('print sheet shows identity, aptitudes, money, and bonus text, and the butt
   expect(printSheet.getByText('nurse text')).toBeInTheDocument()
   expect(printSheet.getByText('puzzle text')).toBeInTheDocument()
   expect(printSheet.getByAltText('map')).toBeInTheDocument()
+  expect(printSheet.getByText('Weapons')).toBeInTheDocument()
+  expect(printSheet.getByText('Attack Results')).toBeInTheDocument()
 
   fireEvent.click(screen.getByTitle('Print or save as PDF'))
   expect(window.print).toHaveBeenCalled()

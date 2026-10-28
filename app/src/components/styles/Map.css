@@ -6,14 +6,33 @@
   z-index: 11;
 }
 
-.map-container {
-  width: 1000px;
-  height: 430px;
+/* as wide as fits, but short enough that the close button stays on a landscape phone screen */
+.map-viewport {
+  width: min(1000px, 94vw, calc((100vh - 60px) * 2.375));
   position: relative;
   background: white;
   border: 2px solid black;
   border-radius: 12px;
   overflow: hidden;
+}
+
+.map-scroll {
+  overflow-x: auto;
+}
+
+/* same proportions as map.jpg (3800x1600), so percentage pin positions line up */
+.map-container {
+  width: 100%;
+  aspect-ratio: 3800 / 1600;
+  position: relative;
+  overflow: hidden;
+}
+
+/* a portrait phone would shrink the map too small to read, so pan it instead */
+@media screen and (max-width: 700px) and (orientation: portrait) {
+  .map-container {
+    width: 680px;
+  }
 }
 
 .map-close {
@@ -22,6 +41,7 @@
 
 .map {
   width: 100%;
+  display: block;
 }
 
 .pin-field {
@@ -103,6 +123,7 @@
   width: 40px;
   position: absolute;
   z-index: 13;
+  touch-action: none;
 }
 
 .clear-pins {
@@ -122,4 +143,14 @@
   text-align: center;
   font-weight: bold;
   background: white;
+}
+
+@media (pointer: coarse) {
+  .map-close, .clear-pins {
+    padding: 6px 14px;
+  }
+
+  .pin-text-input {
+    font-size: 16px;
+  }
 }

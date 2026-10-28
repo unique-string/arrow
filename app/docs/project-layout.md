@@ -28,7 +28,7 @@ Paths are relative to the repository root.
         │   ├── CharSheet.js       Verb list (click to roll), money, roll display; owns inventory items
         │   │                      and keeps Map mounted (hidden when closed)
         │   ├── CharSheet.test.js  Inventory persistence, print sheet, and map pin tests
-        │   ├── PrintSheet.js      Print-only character sheet + map page, portalled to <body>
+        │   ├── PrintSheet.js      Print-only sheet (character + dice rules, violence rules, map), portalled to <body>
         │   │                      (styles/PrintSheet.css hides the app and shows it under @media print)
         │   ├── Inventory.js       Modal with add/remove items (state lives in CharSheet)
         │   ├── Map.js             Map image + "you are here" marker + text pins
@@ -41,7 +41,7 @@ Paths are relative to the repository root.
         │   ├── types.js     10 personality types (text is JSX)
         │   ├── jobs.js      12 professions
         │   ├── reasons.js   6 motivations (text is JSX)
-        │   └── info.js      Instruction page content (JSX), incl. unused "violence" page
+        │   └── info.js      Instruction page content (JSX), incl. "violence" page (printed, unreachable in the app)
         ├── functions/
         │   ├── picker_functions.js  Shuffle, step headings
         │   └── sheet_functions.js   Roll, roll color, money change (+ two empty stubs)
@@ -60,6 +60,13 @@ Paths are relative to the repository root.
 `CharSheet` renders `<Map>` once and hides it with `display: none` when closed, rather than unmounting it. That's what keeps pins and the "you are here" marker position between openings. If the map is ever conditionally rendered, that state will need to move up into `CharSheet` the way inventory items did.
 
 Pin and pin-popup positions are stored as percentages of the map container (`{id, x, y, text}`), and CSS anchors each pin's stem tip at that point.
+
+## Mobile layout
+
+- The page scrolls vertically (`.App` only clips sideways overflow). Modals (`.modal-container`) are `position: fixed`, so they stay centered when the page is scrolled.
+- Breakpoints: 600px stacks the character sheet (verbs and roll box on top, description below); 550px and 700px tighten the picker and the name/info pages; 900px puts the picker in two columns for tablets.
+- Touch: hover highlights are wrapped in `@media (hover: hover)` so they don't stick after a tap. `@media (pointer: coarse)` enlarges small buttons and sets inputs to 16px, which stops iOS from zooming in on focus.
+- Map: `.map-viewport` sizes the frame to fit the screen (including landscape phone height), and `.map-container` keeps map.jpg's 3800:1600 ratio. On a portrait phone the map stays 680px wide and pans sideways inside `.map-scroll`. "Clear pins" sits outside the scroller so it stays in place.
 
 ## Dependencies worth noting
 

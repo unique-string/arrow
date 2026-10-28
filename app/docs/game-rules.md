@@ -87,10 +87,20 @@ Baseball, Football, Soccer, Hockey, Basketball, Lacrosse, Curling, Martial Arts 
 
 The React info page says rolls use "a pair of six-sided dice", so 2d6 appears to be the current design. The color bands are UI hints only. The code has no target numbers or success/failure logic.
 
-## Violence (React `info.js`, written but never displayed)
+## Violence (React `info.js`; printed on page 2 of the print sheet, not shown in the app)
 
 - **Unaware target:** attacker rolls Muscle + Creep vs target's Endure
 - **Aware target:** attacker rolls Muscle vs target's Endure + React
+- **Attack results** (margin of the attack roll):
+  - **+2 or more for target:** no effect, and the target gets a free chance to retaliate.
+  - **+1 for target:** deflected. Attacker React vs target React + Muscle for who moves next.
+  - **Even:** grapple. Both roll Muscle to break it and move next.
+  - **+1 attacker:** little damage. Attacker React + Muscle vs target React for who moves next.
+  - **+2 attacker:** minor injury. Attacker React + Muscle vs target React + Endure.
+  - **+3 attacker:** minor injury, and the target takes −1 on React + Endure vs attacker React + Muscle.
+  - **+4 attacker:** major injury, with the same −1 roll for who moves next.
+  - **+5 attacker:** major injury, and the target falls unconscious.
+  - **+6 or more for attacker:** killed, unless the attacker intends otherwise.
 - **Weapon classes:** 1 Simple (+1 Mus) · 2 Little Trigger (+1 Cre, add React to attack) · 3 Jabbing (+1 Mus, +1 Cre) · 4 Heavy (+2 Mus) · 5 Penetrating (+2 Mus, +2 Cre) · 6 Big Trigger (+2 Mus, add React to attack)
 
 The intro paragraph's summary ("target rolls React + Endure…") states the rolls from the target's side. The bullet list states them from the attacker's side. They agree, but the wording could be unified.

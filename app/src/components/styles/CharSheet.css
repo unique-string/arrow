@@ -29,21 +29,6 @@
   position: relative;
 }
 
-@media screen and (max-width: 600px) {
-  .character-sheet {
-    flex-direction: column;
-    align-items: center;
-    height: 90%;
-  }
-
-  .description-text {
-    width: 88%;
-  }
-
-  .roller {
-    width: 88%;
-  }
-}
 
 .roller {
   position: relative;
@@ -71,7 +56,12 @@
   user-select: none;
   cursor: pointer;
 }
+@media (hover: hover) {
   .sheet-verb:hover {
+    background: rgba(124, 205, 50, .4)
+  }
+}
+  .sheet-verb:active {
     background: rgba(124, 205, 50, .4)
   }
 
@@ -268,6 +258,48 @@ input[type=number] {
 .dark-outlines {
 border: 1px solid rgb(43, 42, 42) !important;
 color: rgb(43, 42, 42) !important;
+}
+
+
+/* phones: verbs and roll box side by side on top, description text below */
+@media screen and (max-width: 600px) {
+  .character-sheet {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .roller {
+    width: 100%;
+    height: auto;
+    align-items: stretch;
+    padding: 12px 0;
+  }
+
+  .sheet-verbs {
+    margin: 0 10px 0 0;
+  }
+
+  .verb-title, .verb-value {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .blank-box-left {
+    height: auto;
+    gap: 10px;
+  }
+
+  .description-text {
+    width: auto;
+    margin: 4px 16px 24px;
+  }
+}
+
+@media (pointer: coarse) {
+  .money input {
+    font-size: 16px;
+  }
 }
 
 
